@@ -14,17 +14,24 @@ class @Highlighter
     newTo = options['newTo']
     oldTo = options['oldTo']
     color = @color(options['color'])
-    @board.find('.square-' + newTo).addClass('highlight-' + color)
-    unless (from == oldTo)
+    $newTo = @board.find('.square-' + newTo)
+    $oldTo = @board.find('.square-' + oldTo)
+    unless ($newTo.hasClass('move'))
+      @board.find('.square-' + newTo).addClass('highlight-' + color)
+    unless (from == oldTo || $oldTo.hasClass('move'))
       @board.find('.square-' + oldTo).removeClass('highlight-' + color)
   move: (options) ->
     from = options['from']
     to = options['to']
     color = @color(options['color'])
-    @board.find('.square-55d63').removeClass('highlight-' + color)
-    @board.find('.square-' + from + ', ' + '.square-' + to).addClass('highlight-' + color)
+    @board.find('.highlight-' + color + '.move').removeClass('highlight-' + color + ' move')
+    @board.find('.square-' + from + ', ' + '.square-' + to).addClass('highlight-' + color + ' move')
+    console.log('Calling App.highlighter.move')
   remove: (options) ->
     from = options['from']
     to = options['to']
     color = @color(options['color'])
-    @board.find('.square-' + from + ', ' + '.square-' + to).removeClass('highlight-' + color);
+    $from = @board.find('.square-' + from)
+    unless ($from.hasClass('move'))
+      $from.removeClass('highlight-' + color)
+    @board.find('.square-' + to).removeClass('highlight-' + color)
