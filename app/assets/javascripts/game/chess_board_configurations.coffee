@@ -23,3 +23,5 @@
           App.game.perform("draw")
       else if (App.chess.in_check())
         App.game.perform("check", move)
+  onSnapEnd: () ->
+    App.board.position(App.chess.fen())
