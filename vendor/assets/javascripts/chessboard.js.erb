@@ -442,7 +442,7 @@ function expandConfig() {
   if (cfg.hasOwnProperty('pieceTheme') !== true ||
       (typeof cfg.pieceTheme !== 'string' &&
        typeof cfg.pieceTheme !== 'function')) {
-    cfg.pieceTheme = 'assets/chessboard/chesspieces/wikipedia/{piece}.png';
+    cfg.pieceTheme = <%= Rails.env.production? ? gon['{piece}'] : '"assets/chessboard/chesspieces/wikipedia/{piece}.png"' %>;
   }
 
   // animation speeds
