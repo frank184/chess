@@ -5,5 +5,6 @@ module ApplicationCable
     def connect
       self.uuid = SecureRandom.uuid
     end
+
   end
 end

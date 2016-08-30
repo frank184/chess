@@ -1,2 +1,12 @@
-<div id="chessboard" style="width:400px"></div>
-<div id="messages"></div>
+<div id="chessboard"></div>
+
+<div id="controls">
+  <div id="messages"></div>
+  <%= form_tag root_path, method: :get, id: 'play_again', style: 'display:none' do %>
+    <%= submit_tag 'Play Again' %>
+  <% end %>
+
+  <%= form_tag root_path, method: :get, id: 'forfeit', style: 'display:none' do %>
+    <%= submit_tag 'Forfeit' %>
+  <% end %>
+</div>
