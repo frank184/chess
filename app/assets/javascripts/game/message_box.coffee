@@ -1,3 +1,4 @@
+# require 'piece_full_name'
 class @MessageBox
   constructor: (@box) ->
   print: (message) -> @box.prepend('<p>' + message + '</p>')
