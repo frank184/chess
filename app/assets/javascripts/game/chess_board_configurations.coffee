@@ -16,10 +16,10 @@
     if (move == null) then "snapback"
     else
       App.game.perform("move", move)
-      if (App.chess.in_check())
-        App.game.perform("check", move)
-      else if (App.chess.game_over())
+      if (App.chess.game_over())
         if (App.chess.in_checkmate())
           App.game.perform("checkmate")
         else if (App.chess.in_draw())
           App.game.perform("draw")
+      else if (App.chess.in_check())
+        App.game.perform("check", move)
