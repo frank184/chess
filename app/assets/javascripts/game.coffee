@@ -4,6 +4,8 @@ $ ->
   App.messages = new MessageBox $(messages)
   # Instantiate Chess Rules object : https://github.com/jhlywa/chess.js
   App.chess = new Chess()
+  # Instantiate Highlighter object
+  App.highlighter = new Highlighter $(chessboard)
   # Instatiate ChessBoard object : https://github.com/oakmac/chessboardjs
   App.board = new ChessBoard('chessboard', ChessBoardConfigurations)
   # Instantiate ChessButtons object

@@ -19,6 +19,10 @@ App.game = App.cable.subscriptions.create "GameChannel",
           from: data.move.from
           to: data.move.to
           promotion: "q"
+        App.highlighter.move
+          from: data.move.from
+          to: data.move.to
+          color: data.move.color
         App.board.position(App.chess.fen())
       when "opponent_forfeits"
         App.messages.forfeit()
