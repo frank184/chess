@@ -1,5 +1,3 @@
-<%= include_gon %>
-
 /*!
  * chessboard.js v0.3.0
  *
@@ -195,6 +193,22 @@ cfg = cfg || {};
 //------------------------------------------------------------------------------
 // Constants
 //------------------------------------------------------------------------------
+
+// paths for images
+cfg.images = {
+  bB: '<%= image_path('chessboard/chesspieces/wikipedia/bB') %>',
+  bK: '<%= image_path('chessboard/chesspieces/wikipedia/bK') %>',
+  bN: '<%= image_path('chessboard/chesspieces/wikipedia/bN') %>',
+  bP: '<%= image_path('chessboard/chesspieces/wikipedia/bP') %>',
+  bQ: '<%= image_path('chessboard/chesspieces/wikipedia/bQ') %>',
+  bR: '<%= image_path('chessboard/chesspieces/wikipedia/bR') %>',
+  wB: '<%= image_path('chessboard/chesspieces/wikipedia/wR') %>',
+  wK: '<%= image_path('chessboard/chesspieces/wikipedia/wK') %>',
+  wN: '<%= image_path('chessboard/chesspieces/wikipedia/wN') %>',
+  wP: '<%= image_path('chessboard/chesspieces/wikipedia/wP') %>',
+  wQ: '<%= image_path('chessboard/chesspieces/wikipedia/wQ') %>',
+  wR: '<%= image_path('chessboard/chesspieces/wikipedia/wR') %>'
+}
 
 var MINIMUM_JQUERY_VERSION = '1.7.0',
   START_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
@@ -440,12 +454,12 @@ function expandConfig() {
     cfg.draggable = true;
   }
 
-  // default piece theme is wikipedia
-  if (cfg.hasOwnProperty('pieceTheme') !== true ||
-      (typeof cfg.pieceTheme !== 'string' &&
-       typeof cfg.pieceTheme !== 'function')) {
-    cfg.pieceTheme = <%= Rails.env.production? ? gon['{piece}'] : '"assets/chessboard/chesspieces/wikipedia/{piece}.png"' %>;
-  }
+  // // default piece theme is wikipedia
+  // if (cfg.hasOwnProperty('pieceTheme') !== true ||
+  //     (typeof cfg.pieceTheme !== 'string' &&
+  //      typeof cfg.pieceTheme !== 'function')) {
+  //   cfg.pieceTheme = cfg.image_paths['{piece}'];
+  // }
 
   // animation speeds
   if (cfg.hasOwnProperty('appearSpeed') !== true ||
@@ -640,12 +654,15 @@ function buildBoard(orientation) {
 }
 
 function buildPieceImgSrc(piece) {
-  if (typeof cfg.pieceTheme === 'function') {
-    return cfg.pieceTheme(piece);
-  }
+  // if (typeof cfg.pieceTheme === 'function') {
+    console.log(piece)
+    console.log(cfg.images[piece])
+    return cfg.images[piece];
+  // }
 
   if (typeof cfg.pieceTheme === 'string') {
-    return cfg.pieceTheme.replace(/{piece}/g, piece);
+    console.log(piece)
+    return cfg.image_paths[piece];
   }
 
   // NOTE: this should never happen
