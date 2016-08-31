@@ -32,7 +32,7 @@ class @Highlighter
     $from.addClass('highlight-' + color + ' last-move')
     $to.addClass('highlight-' + color + ' last-move')
     if $to.hasClass('highlight-' + opponent) then $to.removeClass('highlight-' + opponent)
-  remove: (options) ->
+  undo: (options) ->
     from = options['from']
     to = options['to']
     color = color_full_name(options['color'])
@@ -40,3 +40,5 @@ class @Highlighter
     $to = @board.find('.square-' + to)
     unless $from.hasClass('last-move') then $from.removeClass('highlight-' + color)
     unless $to.hasClass('last-move') then $to.removeClass('highlight-' + color)
+  forfeit: (options) ->
+    @board.find('.last-move').removeClass("highlight-white highlight-black last-move")

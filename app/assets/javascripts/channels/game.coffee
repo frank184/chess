@@ -24,7 +24,9 @@ App.game = App.cable.subscriptions.create "GameChannel",
           to: data.move.to
           color: data.move.color
         App.board.position(App.chess.fen())
-      when "opponent_forfeits"
+      when "forfeit"
+        current_turn_color = color_full_name(App.chess.turn())
+        App.highlighter.forfeit()
         App.messages.forfeit()
         App.buttons.over()
       when "checkmate"

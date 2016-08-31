@@ -48,7 +48,7 @@ module Game
 
     def self.forfeit(uuid)
       winner, loser = [opponent_for(uuid), uuid]
-      ActionCable.server.broadcast "player_#{winner}", {action: "opponent_forfeits"}
+      ActionCable.server.broadcast "player_#{winner}", {action: "forfeit"}
       over(winner, loser)
     end
 

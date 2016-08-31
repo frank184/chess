@@ -2,13 +2,13 @@
   draggable: true
   onDragStart: (source, piece, position, orientation) ->
     turn_regex = new RegExp "^#{App.chess.turn()}"
+    if App.chess.game_over() then false
     unless turn_regex.test(orientation) then false
+    else if piece.search(turn_regex) == -1 then false
     else
-      if piece.search(turn_regex) == -1 then false
-      else
-        App.highlighter.start
-        	from: source
-        	color: orientation
+      App.highlighter.start
+      	from: source
+      	color: orientation
   onDragMove: (newTo, oldTo, source, piece, position, orientation) ->
     App.highlighter.drag
       from: source
@@ -22,7 +22,7 @@
       to: target
       promotion: "q"
     if (move == null)
-      App.highlighter.remove
+      App.highlighter.undo
         from: source
         to: target
         color: orientation
