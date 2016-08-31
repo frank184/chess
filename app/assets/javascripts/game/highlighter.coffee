@@ -40,5 +40,5 @@ class @Highlighter
     $to = @board.find('.square-' + to)
     unless $from.hasClass('last-move') then $from.removeClass('highlight-' + color)
     unless $to.hasClass('last-move') then $to.removeClass('highlight-' + color)
-  forfeit: (options) ->
+  over: (options) ->
     @board.find('.last-move').removeClass("highlight-white highlight-black last-move")
