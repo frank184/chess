@@ -1,21 +1,14 @@
 @ChessBoardConfigurations =
   draggable: true
   onDragStart: (source, piece, position, orientation) ->
-    switch orientation
-      when 'white'
-        if (/^b/.test(App.chess.turn())) then false
-        else if (piece.search(/^w/) == -1) then false
-        else
-          App.highlighter.start
-            from: source
-            color: orientation
-      when 'black'
-        if (piece.search(/^b/) == -1) then false
-        else if (/^w/.test(App.chess.turn())) then false
-        else
-          App.highlighter.start
-            from: source
-            color: orientation
+    turn_regex = new RegExp "^#{App.chess.turn()}"
+    unless turn_regex.test(orientation) then false
+    else
+      if piece.search(turn_regex) == -1 then false
+      else
+        App.highlighter.start
+        	from: source
+        	color: orientation
   onDragMove: (newTo, oldTo, source, piece, position, orientation) ->
     App.highlighter.drag
       from: source
@@ -42,3 +35,13 @@
           App.game.perform("draw")
       else if (App.chess.in_check())
         App.game.perform("check", move)
+  onMouseoverSquare: (square, piece, position, orientation) ->
+    regex = new RegExp "^#{App.chess.turn()}"
+    if regex.test(orientation)
+      # get list of possible moves for this square
+      moves = App.chess.moves
+        square: square
+        verbose: true
+      App.highlighter.moves.show(square, moves)
+  onMouseoutSquare: (square, piece, position, orientation) ->
+    App.highlighter.moves.hide()
