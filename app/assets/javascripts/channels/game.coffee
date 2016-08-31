@@ -31,7 +31,7 @@ App.game = App.cable.subscriptions.create "GameChannel",
         App.buttons.over()
       when "checkmate"
         App.highlighter.over()
-        App.messages.print "Checkmate! You #{data.status}!"
+        App.messages.checkmate(data.status)
         App.buttons.over()
       when "check"
         App.messages.check(data.move)

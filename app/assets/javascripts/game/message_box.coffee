@@ -7,6 +7,7 @@ class @MessageBox
   start: (color) -> @print("Game started! You play as #{color.capitalize()}")
   forfeit: -> @print('Opponent forfeits. You win!')
   draw: -> @print('Game Over! Match Draw!')
+  checkmate: (status) -> @print("Checkmate! You #{status}!")
   check: (move) ->
     piece = piece_full_name(move.piece)
     color =  if /^w/.test(move.color) then 'White' else 'Black'
