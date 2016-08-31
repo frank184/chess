@@ -16,6 +16,7 @@
       oldTo: oldTo
       color: orientation
   onDrop: (source, target, piece, newPos, oldPos, orientation) ->
+    App.highlighter.moves.hide()
     move = App.chess.move
       from: source
       to: target
