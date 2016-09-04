@@ -37,12 +37,14 @@
       else if (App.chess.in_check())
         App.game.perform("check", move)
   onMouseoverSquare: (square, piece, position, orientation) ->
-    regex = new RegExp "^#{App.chess.turn()}"
-    if regex.test(orientation)
-      # get list of possible moves for this square
-      moves = App.chess.moves
-        square: square
-        verbose: true
-      App.highlighter.moves.show(square, moves)
+    if App.game.started
+      regex = new RegExp "^#{App.chess.turn()}"
+      if regex.test(orientation)
+        # get list of possible moves for this square
+        moves = App.chess.moves
+          square: square
+          verbose: true
+        App.highlighter.moves.show(square, moves)
   onMouseoutSquare: (square, piece, position, orientation) ->
-    App.highlighter.moves.hide()
+    if App.game.started
+      App.highlighter.moves.hide()

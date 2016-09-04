@@ -1,4 +1,6 @@
 App.game = App.cable.subscriptions.create "GameChannel",
+  started: false
+  
   connected: ->
     App.messages.waiting()
 
@@ -8,6 +10,7 @@ App.game = App.cable.subscriptions.create "GameChannel",
   received: (data) ->
     switch data.action
       when "start"
+        @started = true
         App.messages.clear()
         App.messages.start(data.color)
         App.buttons.start()
